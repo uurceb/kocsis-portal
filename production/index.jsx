@@ -60,6 +60,7 @@ const mainContainer = (
     <Route exact path='/' component={HomeView}/>
     <Route path='/projects' component={ProjectsView}/>
     <Route path='/phases' component={PhasesView}/>
+    <Footer></Footer>
   </App>
 );
 

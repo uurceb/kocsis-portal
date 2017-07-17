@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Page from '../lib/Page'
-import ProjectAddModal from './Modals/ProjectAddModal'
+import EstFactorAddModal from './Modals/EstFactorAddModal'
 import DataTable from "../lib/DataTable"
 import Constants from '../Constants'
 import AddNewButton from '../lib/AddNewButton'
 
-const colNames = ['Proje Adı', 'Müşteri', 'Açıklama'];
-const objectKeys = ['projectName', 'customer', 'description'];
-const url = Constants.serviceUrl + 'projects';
+const colNames = ['Proje Adı', 'Component', 'Complexity', 'New/Modified','Value'];
+const objectKeys = [{key:'_project',childKey:'projectName'}, 'component', 'complexity', 'newOrModified','value'];
+const url = Constants.serviceUrl + 'estimatingfactors';
 
 class ProjectsView extends Component {
     constructor(props) {
@@ -43,14 +43,14 @@ class ProjectsView extends Component {
     }
     render() {
         return (
-            <Page title="Projects">
+            <Page title="Estimating Factors">
                 <div className="col-md-6">
                     <span className="pull-right">
-                        <AddNewButton modalId="#projectAddModal" />
+                        <AddNewButton modalId="#estFactorAddModal" />
                     </span>
                 </div>
                 <DataTable data={this.state.data} url={url} colNames={colNames} objKeys={objectKeys} />
-                <ProjectAddModal modalId="projectAddModal" url={url} />
+                <EstFactorAddModal modalId="estFactorAddModal" url={url} />
             </Page>
         );
     }

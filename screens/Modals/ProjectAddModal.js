@@ -11,6 +11,10 @@ class ProjectAddModal extends Component {
         _formData[key] = value;
         this.setState({ formData: _formData });
     }
+    clearContent(){
+        console.log('clear content');
+        this.setState({ formData: { projectName: '', customer: '', projectPhase: '', description: '' } });
+    }
     onSubmit() {
         fetch(this.props.url, {
             method: 'POST',
@@ -24,28 +28,30 @@ class ProjectAddModal extends Component {
                 projectPhase: this.state.formData.projectPhase,
                 description: this.state.formData.description
             })
-        }).then(function () {
-            console.log("oke");
-        }).catch(function () {
-            console.log("errore");
+        }).then(() => {
+            this.clearContent();
+        }).catch((e) => {
+            console.log(e);
         });;
     }
     render() {
+        const { formData } = this.state;
+
         return (
-            <Modal id = {this.props.modalId} title="Add Project" onSubmit={() => this.onSubmit()} >
+            <Modal id={this.props.modalId} title="Add Project" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
                 <form>
-                <div className="form-group">
-                    <label htmlFor="projectName">Project Name</label>
-                    <input className="form-control" type="textfield" id="projectName" onBlur={(e) => this.onDataChange("projectName", e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="customer">Customer</label>
-                    <input className="form-control" type="textfield" id="customer" onBlur={(e) => this.onDataChange("customer", e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <textarea className="form-control" id="description" rows="3" onBlur={(e) => this.onDataChange("description", e.target.value)}></textarea>
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="projectName">Project Name</label>
+                        <input className="form-control" type="textfield" value={formData.projectName} id="projectName" onChange={(e) => this.onDataChange("projectName", e.target.value)} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="customer">Customer</label>
+                        <input className="form-control" type="textfield" id="customer" value={formData.customer} onChange={(e) => this.onDataChange("customer", e.target.value)} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        <textarea className="form-control" id="description" rows="3" value={formData.description} onChange={(e) => this.onDataChange("description", e.target.value)}></textarea>
+                    </div>
                 </form>
             </Modal>
         );

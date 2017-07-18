@@ -5,7 +5,11 @@ import DataTable from "../lib/DataTable"
 import Constants from '../Constants'
 import AddNewButton from '../lib/AddNewButton'
 
-const colNames = ['Proje Adı', 'Müşteri', 'Açıklama'];
+const colProps = [
+    { colHeader: 'Project Name', colWidth: '25%' },
+    { colHeader: 'Customer', colWidth: '25%' },
+    { colHeader: 'Description', colWidth: '30%' }];
+
 const objectKeys = ['projectName', 'customer', 'description'];
 const url = Constants.serviceUrl + 'projects';
 
@@ -49,7 +53,7 @@ class ProjectsView extends Component {
                         <AddNewButton modalId="#projectAddModal" />
                     </span>
                 </div>
-                <DataTable data={this.state.data} url={url} colNames={colNames} objKeys={objectKeys} />
+                <DataTable data={this.state.data} url={url} objKeys={objectKeys} colProps={colProps} />
                 <ProjectAddModal modalId="projectAddModal" url={url} />
             </Page>
         );

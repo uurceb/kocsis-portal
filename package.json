@@ -91,9 +91,12 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.1.1",
+    "recharts": "^1.0.0-alpha.2",
     "styled-components": "^2.1.1"
   }
 }

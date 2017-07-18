@@ -5,10 +5,20 @@ import AddNewButton from '../lib/AddNewButton'
 import DataTable from "../lib/DataTable"
 import PhaseAddModal from './Modals/PhaseAddModal'
 
+const colProps = [
+    { colHeader: 'ProjectName', colWidth: '10%' },
+    { colHeader: 'Analysis', colWidth: '6%' },
+    { colHeader: 'Design', colWidth: '6%' },
+    { colHeader: 'Dev', colWidth: '6%' },
+    { colHeader: 'Unit Test', colWidth: '6%' },
+    { colHeader: 'INT', colWidth: '6%' },
+    { colHeader: 'UAT', colWidth: '6%' },
+    { colHeader: 'Project Management', colWidth: '10%' },
+    { colHeader: 'Sol. Arch.', colWidth: '10%' },
+    { colHeader: 'Code M. & Regr.', colWidth: '10%' }];
 
-const colNames = ['Proje Adı', 'P.Yönetimi','Analiz','Tasarım','Geliştirme','Birim Testi','Int Testi','UAT','Sol Arch','Code M. & Reg'];
-const objectKeys = [{key:'_project',childKey:'projectName'}, 'pManagement', 'analysis', 'design', 'dev', 'unitTest','intTest','uat', 'solArch','codeMergeReg'];
-const url = Constants.serviceUrl+'phases';
+const objectKeys = [{ key: '_project', childKey: 'projectName' }, 'analysis', 'design', 'dev', 'unitTest', 'intTest', 'uat', 'pManagement', 'solArch', 'codeMergeReg'];
+const url = Constants.serviceUrl + 'phases';
 
 
 class PhasesView extends Component {
@@ -19,7 +29,7 @@ class PhasesView extends Component {
     }
     loadDataFromServer() {
         let _this = this;
-        window.fetch(url, {
+        fetch(url, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -51,7 +61,7 @@ class PhasesView extends Component {
                         <AddNewButton modalId="#phaseAddModal" />
                     </span>
                 </div>
-                <DataTable data={this.state.phases} url={url} colNames={colNames} objKeys={objectKeys} />
+                <DataTable data={this.state.phases} url={url} colProps={colProps} objKeys={objectKeys} />
                 <PhaseAddModal modalId="phaseAddModal" url={url} />
             </Page>
         );

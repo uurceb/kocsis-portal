@@ -61,6 +61,7 @@ const config = {
   },
   devServer: {
     historyApiFallback: true,
+    disableHostCheck: true
   },
   target: 'web',
   plugins: [
@@ -77,7 +78,7 @@ module.exports = function(env) {
     config.plugins = [
       ...config.plugins,
       new HtmlWebpackPlugin({
-        title: 'Gentelella React',
+        title: 'Koçsis-Portal',
         template: HtmlWebpackTemplate,
         inject: false,
         appMountId: 'content',

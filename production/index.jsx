@@ -9,6 +9,9 @@ import {HomeView,ProjectsView,PhasesView,EstimatingFactorsView} from '../screens
 import img from './images/volkan_kurtarici.jpg';
 import logo from './images/koc_logo.png'
 
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 const mainContainer = (
 <App>
     <Sidebar>

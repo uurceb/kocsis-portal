@@ -5,7 +5,14 @@ import DataTable from "../lib/DataTable"
 import Constants from '../Constants'
 import AddNewButton from '../lib/AddNewButton'
 
-const colNames = ['Proje Adı', 'Component', 'Complexity', 'New/Modified','Value'];
+
+const colProps = [
+    { colHeader: 'Project Name', colWidth: '25%' },
+    { colHeader: 'Component', colWidth: '20%' },
+    { colHeader: 'Complexity', colWidth: '15%' },
+    { colHeader: 'New/Modified', colWidth: '15%' },
+    { colHeader: 'Value', colWidth: '5%' }]
+
 const objectKeys = [{key:'_project',childKey:'projectName'}, 'component', 'complexity', 'newOrModified','value'];
 const url = Constants.serviceUrl + 'estimatingfactors';
 
@@ -49,7 +56,7 @@ class ProjectsView extends Component {
                         <AddNewButton modalId="#estFactorAddModal" />
                     </span>
                 </div>
-                <DataTable data={this.state.data} url={url} colNames={colNames} objKeys={objectKeys} />
+                <DataTable data={this.state.data} url={url} colProps={colProps} objKeys={objectKeys} />
                 <EstFactorAddModal modalId="estFactorAddModal" url={url} />
             </Page>
         );

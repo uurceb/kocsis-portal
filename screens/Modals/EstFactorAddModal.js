@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '../../lib/Modal'
+import FormModal from '../../lib/FormModal'
 import ProjectDropdownList from '../../lib/FormElements/ProjectDropdownList'
 
 
@@ -21,7 +21,7 @@ class EstFactorAddModal extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                projectId: this.state.formData.projectId,
+                _project: this.state.formData.projectId,
                 component: this.state.formData.component,
                 complexity: this.state.formData.complexity,
                 newOrModified: this.state.formData.newOrModified,
@@ -40,8 +40,7 @@ class EstFactorAddModal extends Component {
     render() {
         const {formData} = this.state;
         return (
-            <Modal id={this.props.modalId} title="Add Estimating Factor" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
-                <form>
+            <FormModal id={this.props.modalId} title="Add Estimating Factor" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
                     <ProjectDropdownList onChange={(value) => this.onDataChange("projectId", value)}/>
                     <div className="form-group">
                         <label htmlFor="component">Component</label>
@@ -57,10 +56,9 @@ class EstFactorAddModal extends Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="value">Value</label>
-                        <input className="form-control" type="textfield" value={formData.projectName} id="value" onChange={(e) => this.onDataChange("value", e.target.value)} />
+                        <input className="form-control" type="textfield" value={formData.value} id="value" onChange={(e) => this.onDataChange("value", e.target.value)} />
                     </div>
-                </form>
-            </Modal>
+            </FormModal>
         );
     }
 }

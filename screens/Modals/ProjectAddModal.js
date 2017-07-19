@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '../../lib/Modal'
+import FormModal from '../../lib/FormModal'
 
 class ProjectAddModal extends Component {
     constructor(props) {
@@ -38,8 +38,7 @@ class ProjectAddModal extends Component {
         const { formData } = this.state;
 
         return (
-            <Modal id={this.props.modalId} title="Add Project" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
-                <form>
+            <FormModal id={this.props.modalId} title="Add Project" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
                     <div className="form-group">
                         <label htmlFor="projectName">Project Name</label>
                         <input className="form-control" type="textfield" value={formData.projectName} id="projectName" onChange={(e) => this.onDataChange("projectName", e.target.value)} />
@@ -52,8 +51,7 @@ class ProjectAddModal extends Component {
                         <label htmlFor="description">Description</label>
                         <textarea className="form-control" id="description" rows="3" value={formData.description} onChange={(e) => this.onDataChange("description", e.target.value)}></textarea>
                     </div>
-                </form>
-            </Modal>
+            </FormModal>
         );
     }
 }

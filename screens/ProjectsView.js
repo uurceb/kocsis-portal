@@ -45,16 +45,18 @@ class ProjectsView extends Component {
         this.loadInterval && clearInterval(this.loadInterval);
         this.loadInterval = false;
     }
+    
     render() {
         return (
             <Page title="Projects">
                 <div className="col-md-6">
                     <span className="pull-right">
-                        <AddNewButton modalId="#projectAddModal" />
+                        <AddNewButton modalId="#addModal" />
                     </span>
                 </div>
-                <DataTable data={this.state.data} url={url} objKeys={objectKeys} colProps={colProps} />
-                <ProjectAddModal modalId="projectAddModal" url={url} />
+                <DataTable data={this.state.data} url={url} objKeys={objectKeys} colProps={colProps} screenName="ProjectsView"/>
+                <ProjectAddModal modalId="addModal" url={url} />
+                
             </Page>
         );
     }

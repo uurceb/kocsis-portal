@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '../../lib/Modal'
+import FormModal from '../../lib/FormModal'
 import ProjectDropdownList from '../../lib/FormElements/ProjectDropdownList'
 
 
@@ -21,7 +21,7 @@ class PhaseAddModal extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                projectId: this.state.formData.projectId,
+                _project: this.state.formData.projectId,
                 pManagement: this.state.formData.pManagement,
                 analysis: this.state.formData.analysis,
                 design: this.state.formData.design,
@@ -45,8 +45,7 @@ class PhaseAddModal extends Component {
     render() {
         const {formData} = this.state;
         return (
-            <Modal id={this.props.modalId} title="Add Phase" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
-                <form>
+            <FormModal id={this.props.modalId} title="Add Phase" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
                     <ProjectDropdownList onChange={(value) => this.onDataChange("projectId", value)}/>
                     <div className="form-group">
                         <label htmlFor="pManagement">Project Management %</label>
@@ -84,8 +83,7 @@ class PhaseAddModal extends Component {
                         <label htmlFor="codeMergeReg">Code Merge & Regression %</label>
                         <input className="form-control" type="textfield" id="codeMergeReg" onChange={(e) => this.onDataChange("codeMergeReg", e.target.value)} value={formData.codeMergeReg}/>
                     </div>
-                </form>
-            </Modal>
+            </FormModal>
         );
     }
 }

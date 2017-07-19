@@ -37,7 +37,7 @@ class HomeView extends Component {
     }
     loadDataFromServer() {
         let _this = this;
-        window.fetch(url, {
+        fetch(url, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

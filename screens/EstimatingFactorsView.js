@@ -4,6 +4,7 @@ import EstFactorAddModal from './Modals/EstFactorAddModal'
 import DataTable from "../lib/DataTable"
 import Constants from '../Constants'
 import AddNewButton from '../lib/AddNewButton'
+import {ModalManager} from 'react-dynamic-modal'
 
 
 const colProps = [
@@ -39,7 +40,10 @@ class ProjectsView extends Component {
                 console.error(error);
             });
     }
-
+    openViewModal(){
+            ModalManager.open(
+                <EstFactorAddModal  url={url} onRequestClose={() => true}/>);
+    }
     componentDidMount() {
         this.loadDataFromServer();
         this.loadInterval = setInterval(this.loadDataFromServer, 2000);
@@ -52,12 +56,11 @@ class ProjectsView extends Component {
         return (
             <Page title="Estimating Factors">
                 <div className="col-md-6">
-                    <span className="pull-right">
-                        <AddNewButton modalId="#estFactorAddModal" />
+                    <span className="pull-left">
+                        <AddNewButton onClick={()=>this.openViewModal()} label="Add New Estimating Factor"/>
                     </span>
                 </div>
                 <DataTable data={this.state.data} url={url} colProps={colProps} objKeys={objectKeys} />
-                <EstFactorAddModal modalId="estFactorAddModal" url={url} />
             </Page>
         );
     }

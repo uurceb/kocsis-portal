@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import FormModal from '../../lib/FormModal'
 import ProjectDropdownList from '../../lib/FormElements/ProjectDropdownList'
-
+import { ModalManager } from 'react-dynamic-modal';
 
 class PhaseAddModal extends Component {
     constructor(props) {
         super(props);
-        this.state = { formData: { projectId: '', pManagement: '', analysis: '', design: '', dev: '', unitTest: '', intTest: '', uat: '', solArch: '', codeMergeReg: '' } }
+        this.state = { formData: { projectId: '', analysis: '10', design: '15', dev: '45', unitTest: '15', intTest: '10', uat: '5', pManagement: '10', solArch: '0', codeMergeReg: '0' } }
     }
     onDataChange(key, value) {
         let _formData = this.state.formData;
@@ -33,56 +33,62 @@ class PhaseAddModal extends Component {
                 codeMergeReg: this.state.formData.codeMergeReg
             })
         }).then(function () {
-            this.clearContent();
-            console.log("oke");
-        }).catch(function () {
+            ModalManager.close();
+        }).catch(function (err) {
+            console.log(err);
             console.log("errore");
         });;
     }
-    clearContent(){
-        this.setState({ formData: { projectId: '', pManagement: '', analysis: '', design: '', dev: '', unitTest: '', intTest: '', uat: '', solArch: '', codeMergeReg: '' } });
-    }
     render() {
-        const {formData} = this.state;
+        const { formData } = this.state;
         return (
-            <FormModal id={this.props.modalId} title="Add Phase" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
-                    <ProjectDropdownList onChange={(value) => this.onDataChange("projectId", value)}/>
-                    <div className="form-group">
-                        <label htmlFor="pManagement">Project Management %</label>
-                        <input className="form-control" type="textfield" id="pManagement" onChange={(e) => this.onDataChange("pManagement", e.target.value)} value={formData.pManagement}/>
+            <FormModal id={this.props.modalId} title="Add Phase" onSubmit={() => this.onSubmit()} >
+                <div className="row">
+                    <div className="col-md-4 col-sm-12 col-xs-12 form-group">
+                        <label htmlFor="projectName">Project</label>
+                        <ProjectDropdownList onChange={(value) => this.onDataChange("projectId", value)} />
                     </div>
-                    <div className="form-group">
+                </div>
+                <div className="row">
+                    <div className="col-md-2 col-sm-12 col-xs-12 form-group">
                         <label htmlFor="analysis">Analysis %</label>
-                        <input className="form-control" type="textfield" id="analysis" onChange={(e) => this.onDataChange("analysis", e.target.value)} value={formData.analysis}/>
+                        <input className="form-control" type="textfield" id="analysis" onChange={(e) => this.onDataChange("analysis", e.target.value)} value={formData.analysis} />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-2 col-sm-12 col-xs-12 form-group">
                         <label htmlFor="design">Design %</label>
-                        <input className="form-control" type="textfield" id="design" onChange={(e) => this.onDataChange("design", e.target.value)} value={formData.design}/>
+                        <input className="form-control" type="textfield" id="design" onChange={(e) => this.onDataChange("design", e.target.value)} value={formData.design} />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="dev">Development %</label>
-                        <input className="form-control" type="textfield" id="dev" onChange={(e) => this.onDataChange("dev", e.target.value)} value={formData.dev}/>
+                    <div className="col-md-2 col-sm-12 col-xs-12 form-group">
+                        <label htmlFor="dev">Dev %</label>
+                        <input className="form-control" type="textfield" id="dev" onChange={(e) => this.onDataChange("dev", e.target.value)} value={formData.dev} />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-2 col-sm-12 col-xs-12 form-group">
                         <label htmlFor="unitTest">Unit Test %</label>
-                        <input className="form-control" type="textfield" id="unitTest" onChange={(e) => this.onDataChange("unitTest", e.target.value)} value={formData.unitTest}/>
+                        <input className="form-control" type="textfield" id="unitTest" onChange={(e) => this.onDataChange("unitTest", e.target.value)} value={formData.unitTest} />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-2 col-sm-12 col-xs-12 form-group">
                         <label htmlFor="intTest">Int Test %</label>
-                        <input className="form-control" type="textfield" id="intTest" onChange={(e) => this.onDataChange("intTest", e.target.value)} value={formData.intTest}/>
+                        <input className="form-control" type="textfield" id="intTest" onChange={(e) => this.onDataChange("intTest", e.target.value)} value={formData.intTest} />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-2 col-sm-12 col-xs-12 form-group">
                         <label htmlFor="uat">UAT %</label>
-                        <input className="form-control" type="textfield" id="uat" onChange={(e) => this.onDataChange("uat", e.target.value)} value={formData.uat}/>
+                        <input className="form-control" type="textfield" id="uat" onChange={(e) => this.onDataChange("uat", e.target.value)} value={formData.uat} />
                     </div>
-                    <div className="form-group">
+                </div>
+                <div className="row">
+                    <div className="col-md-4 col-sm-12 col-xs-12 form-group">
+                        <label htmlFor="pManagement">Project Management %</label>
+                        <input className="form-control" type="textfield" id="pManagement" onChange={(e) => this.onDataChange("pManagement", e.target.value)} value={formData.pManagement} />
+                    </div>
+                    <div className="col-md-4 col-sm-12 col-xs-12 form-group">
                         <label htmlFor="solArch">Solution Architecture %</label>
-                        <input className="form-control" type="textfield" id="solArch" onChange={(e) => this.onDataChange("solArch", e.target.value)} value={formData.solArch}/>
+                        <input className="form-control" type="textfield" id="solArch" onChange={(e) => this.onDataChange("solArch", e.target.value)} value={formData.solArch} />
                     </div>
-                    <div className="form-group">
+                    <div className="col-md-4 col-sm-12 col-xs-12 form-group">
                         <label htmlFor="codeMergeReg">Code Merge & Regression %</label>
-                        <input className="form-control" type="textfield" id="codeMergeReg" onChange={(e) => this.onDataChange("codeMergeReg", e.target.value)} value={formData.codeMergeReg}/>
+                        <input className="form-control" type="textfield" id="codeMergeReg" onChange={(e) => this.onDataChange("codeMergeReg", e.target.value)} value={formData.codeMergeReg} />
                     </div>
+                </div>
             </FormModal>
         );
     }

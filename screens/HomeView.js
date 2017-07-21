@@ -82,8 +82,5 @@ class HomeView extends Component {
     }
 }
 
-const MyDiv = styled.div`
-width: 76
-`
 
 export default HomeView;

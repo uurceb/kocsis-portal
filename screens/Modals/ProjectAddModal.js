@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import FormModal from '../../lib/FormModal'
+import {ModalManager} from 'react-dynamic-modal';
+
 
 class ProjectAddModal extends Component {
     constructor(props) {
         super(props);
-        this.state = { formData: { projectName: '', customer: '', projectPhase: '', description: '' } }
+        this.state = { formData: { projectName: '', customer: '', description: '' } }
     }
     onDataChange(key, value) {
         let _formData = this.state.formData;
         _formData[key] = value;
         this.setState({ formData: _formData });
-    }
-    clearContent(){
-        console.log('clear content');
-        this.setState({ formData: { projectName: '', customer: '', projectPhase: '', description: '' } });
     }
     onSubmit() {
         fetch(this.props.url, {
@@ -29,7 +27,7 @@ class ProjectAddModal extends Component {
                 description: this.state.formData.description
             })
         }).then(() => {
-            this.clearContent();
+            ModalManager.close();
         }).catch((e) => {
             console.log(e);
         });;
@@ -38,7 +36,7 @@ class ProjectAddModal extends Component {
         const { formData } = this.state;
 
         return (
-            <FormModal id={this.props.modalId} title="Add Project" onSubmit={() => this.onSubmit()} onClose={()=>this.clearContent()}>
+            <FormModal  title="Add Project" onSubmit={() => this.onSubmit()} >
                     <div className="form-group">
                         <label htmlFor="projectName">Project Name</label>
                         <input className="form-control" type="textfield" value={formData.projectName} id="projectName" onChange={(e) => this.onDataChange("projectName", e.target.value)} />

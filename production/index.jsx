@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 
 import { App, Footer, Sidebar, TopNav } from '..';
-import {HomeView,ProjectsView,PhasesView,EstimatingFactorsView} from '../screens';
+import {HomeView,ProjectsView,PhasesView,EstimatingFactorsView,ParametersView} from '../screens';
 
 import img from './images/volkan_kurtarici.jpg';
 import logo from './images/koc_logo.png'
@@ -29,6 +29,7 @@ const mainContainer = (
             <li><Link to = "/projects">Projects</Link></li>
             <li><Link to = "/phases">Phases</Link></li>
             <li><Link to = "/estimatingfactors">Estimating Factors</Link></li>
+            <li><Link to = "/parameters">Parameters</Link></li>
           </Sidebar.Menu.Section.Category>
         </Sidebar.Menu.Section>
       </Sidebar.Menu>
@@ -58,6 +59,7 @@ const mainContainer = (
     <Route path='/projects' component={ProjectsView}/>
     <Route path='/phases' component={PhasesView}/>
     <Route path='/estimatingfactors' component={EstimatingFactorsView}/>
+     <Route path='/parameters' component={ParametersView}/>
     <Footer></Footer>
   </App>
 );

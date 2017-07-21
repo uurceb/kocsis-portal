@@ -4,6 +4,7 @@ import ProjectAddModal from './Modals/ProjectAddModal'
 import DataTable from "../lib/DataTable"
 import Constants from '../Constants'
 import AddNewButton from '../lib/AddNewButton'
+import {ModalManager} from 'react-dynamic-modal'
 
 const colProps = [
     { colHeader: 'Project Name', colWidth: '25%' },
@@ -45,18 +46,20 @@ class ProjectsView extends Component {
         this.loadInterval && clearInterval(this.loadInterval);
         this.loadInterval = false;
     }
-    
+    openViewModal(){
+            ModalManager.open(
+                <ProjectAddModal  url={url} onRequestClose={() => true}/>);
+    }
     render() {
         return (
             <Page title="Projects">
+                
                 <div className="col-md-6">
-                    <span className="pull-right">
-                        <AddNewButton modalId="#addModal" />
+                    <span className="pull-left">
+                        <AddNewButton   onClick={()=>this.openViewModal()} label="Add New Project"/>
                     </span>
                 </div>
                 <DataTable data={this.state.data} url={url} objKeys={objectKeys} colProps={colProps} screenName="ProjectsView"/>
-                <ProjectAddModal modalId="addModal" url={url} />
-                
             </Page>
         );
     }
